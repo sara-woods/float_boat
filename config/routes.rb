@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   resources :boats do
     resources :bookings, only: [:new, :create]
   end
-  resources :bookings, only: [:index, :update]
+  resources :bookings, only: [:update]
   get "my_bookings", to: "bookings#my_bookings"
 end
