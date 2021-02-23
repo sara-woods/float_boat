@@ -13,3 +13,9 @@
 <p>£<%= @boat.daily_rate %></p>
 
 
+<h3>Booking Form</h3>
+<%= simple_form_for [ @boat, @booking ] do |f| %>
+  <%= f.input :starting_date %>
+  <%= f.input :ending_date %>
+  <%= f.submit class: "btn btn-primary"%>
+<% end %>
