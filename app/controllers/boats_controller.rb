@@ -1,5 +1,5 @@
 class BoatsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index]
 
   def new
     @boat = Boat.new
@@ -21,6 +21,7 @@ class BoatsController < ApplicationController
 
   def show
     @boat = Boat.find(params[:id])
+    @booking = Booking.new
   end
 
   def edit
