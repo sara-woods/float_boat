@@ -1,6 +1,6 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background-color: white;
+  background-color:white;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -15,4 +15,26 @@
   margin: 0 8px;
 }
 
+
+.nav-link {
+  color: rgb(65, 65, 65);
+}
+
+.navbar-home  {
+  background-color: rgba(255, 255, 255, 0.2);
+  position: fixed;
+  width: 100vw;
+  a.nav-link {
+    color: white;
+    &:hover {
+      color: rgb(202, 202, 202);
+    }
+  }
+}
+
+.nav-item.active {
+  .nav-link {
+    font-weight: bolder;
+  }
+}
 
