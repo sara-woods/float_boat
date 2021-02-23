@@ -1,7 +1,12 @@
 <h1>My Bookings</h1>
-<% @bookings.each do |booking| %>
-  <li><%= booking.id %></li>
-<% end %>
 
+   <% @bookings.each do |booking| %>
+      Booking Number: <%= booking.id %> <br>
+      From: <%= booking.starting_date.strftime("%e %b %Y") %> <br>
+      To: <%= booking.ending_date.strftime("%e %b %Y") %> <br>
+      Confirmed: <%= booking.confirmation %> <br>
+      Boat Owner: <%= booking.boat.user.name %> <br>
+      Booked By: <%= booking.user.name %>
+   <% end %>
 
 
