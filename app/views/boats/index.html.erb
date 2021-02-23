@@ -2,9 +2,10 @@
   <div class="row">
     <% @boats.each do |boat| %>
       <div class="col-12 col-md-6 col-lg-3">
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://source.unsplash.com/500x400/?boat');">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://source.unsplash.com/500x400/?boat');
+
           <div class="card-description">
-            <h2><%= boat.name %></h2>
+            <h1><%= link_to "#{boat.name}", boat %></h1>
             <p><%= boat.address %></p>
             <h2><%= boat.daily_rate %></h2>
           </div>
