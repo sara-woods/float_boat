@@ -17,6 +17,10 @@ class BoatsController < ApplicationController
     @boats = Boat.all
   end
 
+  def show
+    @boat = Boat.find(params[:id])
+  end
+
   def edit
     @boat = Boat.find(params[:id])
   end
@@ -36,7 +40,10 @@ class BoatsController < ApplicationController
     redirect_to boats_path
   end
 
+
+
   private
+
 
   def boat_params
     params.require(:boat).permit(:name, :address, :description, :daily_rate)
