@@ -15,12 +15,9 @@ class BookingsController < ApplicationController
 
   private
 
-    def booking_params
-      params.require(:booking).permit(:starting_date, :ending_date)
-    end
+  def booking_params
+    params.require(:booking).permit(:starting_date, :ending_date)
   end
-
-
 
   def my_bookings
     @bookings = Booking.where(user: current_user)
