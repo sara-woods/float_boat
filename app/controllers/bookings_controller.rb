@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
   @booking.user = current_user
   if @booking.save
     flash[:notice] = "Booking for #{@boat.name} complete!"
-    redirect_to boat_path(@boat)
+    redirect_to boat_path(@boat) # redirect to my_bookings instead
   else
     render "boats/show"
   end
