@@ -18,7 +18,7 @@ Booking.destroy_all if Rails.env.development?
 15.times do
   User.create!(name: Faker::Name.name,
               email: Faker::Internet.email,
-              encrypted_password: "123")
+              password: "123456")
 end
 
 
