@@ -9,9 +9,9 @@
 require 'date'
 
 # Destroy already existing seeds to not overpopulate database for every 'db:seed'
+Booking.destroy_all if Rails.env.development?
 Boat.destroy_all if Rails.env.development?
 User.destroy_all if Rails.env.development?
-Booking.destroy_all if Rails.env.development?
 
 
 # Create user seeds (15 of them)
@@ -23,12 +23,12 @@ end
 
 
 # Create boat seeds (10 of them)
-10.times do 
+10.times do
   Boat.create!(name: Faker::FunnyName.two_word_name,
-              address: Faker::Address.street_address, 
+              address: Faker::Address.street_address,
               description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
               daily_rate: rand(10..100),
-              user_id: rand(1..7))          
+              user_id: rand(1..7))
 end
 
 
