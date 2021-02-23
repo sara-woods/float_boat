@@ -1,0 +1,16 @@
+.page-container {
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+
+.footer-container {
+  background-color: rgb(230, 230, 230);
+  height: 130px;
+  text-align: center;
+  color: rgb(44, 44, 44);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
