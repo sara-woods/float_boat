@@ -1,4 +1,7 @@
 class BoatsController < ApplicationController
+ def index
+    @boats = Boat.all
+  end
 
   def edit
     @boat = Boat.find(params[:id])
@@ -21,5 +24,8 @@ def boat_params
   params.require(:boat).permit(:name, :decription, :daily_rate)
 end
 
+
+
+ 
 
 end
