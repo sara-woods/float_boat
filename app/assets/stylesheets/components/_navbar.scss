@@ -17,7 +17,7 @@
 
 
 .nav-link {
-  color: rgb(65, 65, 65);
+  color: black;
 }
 
 .navbar-home  {
@@ -34,7 +34,19 @@
 
 .nav-item.active {
   .nav-link {
-    font-weight: bolder;
+    font-weight: 700;
+    &:hover {
+      color: rgb(61, 61, 61);
+    }
   }
 }
+
+.nav-item {
+  .nav-link {
+    &:hover {
+      color: rgb(61, 61, 61);
+    }
+  }
+}
+
 
