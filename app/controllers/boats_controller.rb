@@ -1,6 +1,10 @@
 class BoatsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
+  def my_boats
+    @boats = current_user.boats
+  end
+
   def new
     @boat = Boat.new
   end
@@ -39,7 +43,8 @@ class BoatsController < ApplicationController
   end
 
   def destroy
-    boat.destroy
+    @boat = Boat.find(params[:id])
+    @boat.destroy
     redirect_to boats_path
   end
 
