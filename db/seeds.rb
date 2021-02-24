@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'date'
+require "open-uri"
 
 # Destroy already existing seeds to not overpopulate database for every 'db:seed'
 Booking.destroy_all if Rails.env.development?
@@ -21,14 +22,20 @@ User.destroy_all if Rails.env.development?
               password: "123456")
 end
 
+file_array = []
+20.times do
+  file_array << URI.open('https://giantbomb1.cbsistatic.com/uploads/original/9/99864/2419866-nes_console_set.png')
+end
 
 # Create boat seeds (10 of them)
 10.times do
-  Boat.create!(name: Faker::FunnyName.two_word_name,
+  boat = Boat.new(name: Faker::FunnyName.two_word_name,
               address: Faker::Address.street_address,
               description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
               daily_rate: rand(10..100),
               user_id: rand(1..7))
+  boat.photos.attach(io: file_array.sample)
+  boat.save!
 end
 
 
