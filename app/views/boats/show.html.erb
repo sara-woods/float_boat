@@ -45,17 +45,18 @@
 <div class="row">
   <div class="col-8">
     <div class="info-holder">
-      <h1><%= @boat.name %></h1>
+      <h2><%= @boat.name %></h2>
       <p><%= @boat.address %></p>
-      <div><%= @boat.description %>
+      <div class="info-text">
+        <%= @boat.description %>
       </div>
-      <h3>£<%= @boat.daily_rate %> /day</h3>
+      <h3><span>£<%= @boat.daily_rate %></span> /day</h3>
     </div>
   </div>
 
   <div class="col-4">
     <div class="info-holder lightgreen-bg">
-      <h3>Booking Form</h3>
+      <h5>Book me here</h5>
       <%= simple_form_for [ @boat, @booking ] do |f| %>
         <%= f.input :starting_date, as: :date, html5:  true %>
         <%= f.input :ending_date, as: :date, html5:  true %>
