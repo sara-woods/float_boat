@@ -27,7 +27,7 @@
   a.nav-link {
     color: white;
     &:hover {
-      color: rgb(202, 202, 202);
+      color: rgb(197, 197, 197);
     }
   }
 }
@@ -36,7 +36,7 @@
   .nav-link {
     font-weight: 700;
     &:hover {
-      color: rgb(61, 61, 61);
+      color: $blue;
     }
   }
 }
@@ -44,7 +44,7 @@
 .nav-item {
   .nav-link {
     &:hover {
-      color: rgb(61, 61, 61);
+      color: $blue;
     }
   }
 }
