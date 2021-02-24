@@ -14,7 +14,14 @@
           - Until: <%= booking.ending_date.strftime("%e %b %Y") %> <br>
           Boat Owner: <%= booking.boat.user.name %> <br>
           Booked By: <%= booking.user.name %> <br>
-          Confirmation: <%= booking.confirmation ? 'You are all set!' : 'Your booking request was declined'%>
+          Confirmation:
+          <% if booking.confirmation == nil %>
+            <%=  'Waiting for owner\'s response' %>
+          <% elsif booking.confirmation? %>
+            <%= 'You are all set!' %>
+          <% else %>
+             <%= 'Your booking request was declined' %>
+          <% end %>
           <div style="font-size: 16px; text-align: right">
             <a href="www.instagram.com" style=" color: grey; font-size: 50px">
               <i class="fas fa-edit"></i>
@@ -40,6 +47,14 @@
           From: <%= booking.starting_date.strftime("%e %b %Y") %>
           - Until: <%= booking.ending_date.strftime("%e %b %Y") %> <br>
           Booked By: <%= booking.user.name %> <br>
+          Confirmation:
+          <% if booking.confirmation == nil %>
+            <%=  'Waiting for your response' %>
+          <% elsif booking.confirmation? %>
+            <%= 'You accepted this reservation\'s request' %>
+          <% else %>
+             <%= 'You declined this reservation\'s request' %>
+          <% end %>
           <% if booking.confirmation == nil %>
             <%= link_to "Accept", booking_path(booking, confirmation: true), method: "patch", class:"btn btn-success" %>
             <%= link_to "Decline", booking_path(booking, confirmation: false), method: "patch", class:"btn btn-danger" %>
