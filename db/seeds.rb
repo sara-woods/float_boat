@@ -28,21 +28,23 @@ end
               address: Faker::Address.street_address,
               description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
               daily_rate: rand(10..100),
-              # user_id: rand(1..7))
-              user: User.all.sample)
+              user_id: rand(1..7))
 end
 
 
 # Create booking seeds (3 of them)
 Booking.create!(starting_date: Date.new(2021, 5, 10),
 ending_date: Date.new(2021, 5, 12),
-boat: Boat.first,
-user: User.first)
+boat_id: 1,
+user_id: 8)
 
 Booking.create!(starting_date: Date.new(2021, 4, 5),
 ending_date: Date.new(2021, 4, 10),
-boat: Boat.last,
-user: User.last)
+boat_id: 5,
+user_id: 9)
 
-
+Booking.create!(starting_date: Date.new(2021, 3, 14),
+ending_date: Date.new(2021, 3, 24),
+boat_id: 6,
+user_id: 10)
 
