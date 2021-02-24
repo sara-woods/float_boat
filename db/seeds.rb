@@ -36,12 +36,7 @@ end
 Booking.create!(starting_date: Date.new(2021, 5, 10),
 ending_date: Date.new(2021, 5, 12),
 boat_id: 1,
-user_id: 52)
-
-Booking.create!(starting_date: Date.new(2021, 5, 10),
-ending_date: Date.new(2021, 5, 12),
-boat_id: 3,
-user_id: 52)
+user_id: 8)
 
 Booking.create!(starting_date: Date.new(2021, 4, 5),
 ending_date: Date.new(2021, 4, 10),
