@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   def my_bookings
-    @bookings = Booking.where(user: current_user)
+    @bookings = current_user.bookings
+    @boat_bookings = current_user.boat_bookings
   end
 
   def create
@@ -10,11 +11,21 @@ class BookingsController < ApplicationController
   @booking.user = current_user
   if @booking.save
     flash[:notice] = "Booking for #{@boat.name} complete!"
-    redirect_to my_bookings_path 
+    redirect_to my_bookings_path
   else
     render "boats/show"
   end
-end
+  end
+
+  def update
+    @booking = Booking.find(params[:id])
+    @booking.confirmation = params[:confirmation]
+    if @booking.save
+      redirect_to my_bookings_path, notice: "Booking #{@booking.confirmation ? 'confirmed' : 'declined' }!"
+    else
+      redirect_to my_bookings_path, alert: "Oops, something went wrong!"
+    end
+  end
 
   private
 
