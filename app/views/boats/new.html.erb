@@ -1,7 +1,16 @@
-<%= simple_form_for @boat do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :daily_rate %>
-  <%= f.input :address %>
-  <%= f.submit "Add boat", class: "btn btn-primary" %>
-<% end %>
+<div class="form-container">
+<h2 class="text-center">Boat information</h2>
+  <div class="info-holder lightgreen-bg">
+    <%= simple_form_for @boat do |f| %>
+      <%= f.input :name %>
+      <%= f.input :description %>
+      <%= f.input :daily_rate %>
+      <%= f.input :address %>
+      <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+      <%= f.submit "Add boat", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+
+
+</div>

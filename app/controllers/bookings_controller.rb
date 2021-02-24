@@ -4,6 +4,10 @@ class BookingsController < ApplicationController
     @boat_bookings = current_user.boat_bookings
   end
 
+  def my_boats
+    @boats = current_user.boats
+  end
+
   def create
   @boat = Boat.find(params[:boat_id])
   @booking = Booking.new(booking_params)
@@ -26,6 +30,7 @@ class BookingsController < ApplicationController
       redirect_to my_bookings_path, alert: "Oops, something went wrong!"
     end
   end
+
 
   private
 

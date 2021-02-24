@@ -17,7 +17,7 @@
 
 
 .nav-link {
-  color: rgb(65, 65, 65);
+  color: black;
 }
 
 .navbar-home  {
@@ -27,14 +27,26 @@
   a.nav-link {
     color: white;
     &:hover {
-      color: rgb(202, 202, 202);
+      color: rgb(197, 197, 197);
     }
   }
 }
 
 .nav-item.active {
   .nav-link {
-    font-weight: bolder;
+    font-weight: 700;
+    &:hover {
+      color: $blue;
+    }
   }
 }
+
+.nav-item {
+  .nav-link {
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
 
