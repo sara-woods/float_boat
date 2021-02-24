@@ -13,7 +13,7 @@ class BoatsController < ApplicationController
     @boat = Boat.new(boat_params)
     @boat.user = current_user
     if @boat.save
-      redirect_to boats_path
+      redirect_to my_boats_path
     else
       render :new
     end
@@ -38,14 +38,14 @@ class BoatsController < ApplicationController
     if @boat.save
       redirect_to boat_path(@boat)
     else
-      render :edit
+      render :edit, alert: "Boat was edited successfully!"
     end
   end
 
   def destroy
     @boat = Boat.find(params[:id])
     @boat.destroy
-    redirect_to boats_path
+    redirect_to my_boats_path, alert: "Boat was deleted successfully!"
   end
 
 

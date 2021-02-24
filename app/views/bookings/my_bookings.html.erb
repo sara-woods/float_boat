@@ -1,71 +1,68 @@
+<h2 class="text-center">My bookings</h2>
+<div class="container mt-4">
 
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)), url(https://images.unsplash.com/photo-1579052579104-9be1ca94c714?ixlib=rb-1.2.1&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80);">
-  <div class="col-12 col-md-12 col-lg-12" style= "margin: 10px;">
-    <div class="container" style="background-color: rgba(45, 224, 209, 0.9);padding: 20px; border-radius: 10px;">
-      <h1>My Bookings: </h1>
-    </div>
-  </div>
   <div class="row">
     <% @bookings.each do |booking| %>
-      <div class="col-12 col-md-12 col-lg-12" style= " margin: 10px;">
-        <div class="container" style="font-size: 18px; background-color: white; opacity: 0.9; padding: 20px; border-radius: 10px;">
-          Booking Number: 000<%= booking.id %> <br>
-          From: <%= booking.starting_date.strftime("%e %b %Y") %>
-          - Until: <%= booking.ending_date.strftime("%e %b %Y") %> <br>
-          Boat Owner: <%= booking.boat.user.name %> <br>
-          Booked By: <%= booking.user.name %> <br>
-          Confirmation:
+      <div class="col-12">
+        <div class="booking-card">
+
+        <div class="booking-left">
+          <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
+          <%= link_to boat_path(booking.boat) do %>
+            <h4><%= booking.boat.name %> </h4>
+          <% end %>        
+          <p><span>Boat Owner</span><br> <%= booking.boat.user.name %></p>
+        </div>
+
+        <div class="booking-right">
+          <h6 class="text-right"> Booking #000<%= booking.id %> </h6>
           <% if booking.confirmation == nil %>
-            <%=  'Waiting for owner\'s response' %>
+            <p class="text-right"><em><%=  'Waiting for owner\'s response' %></em></p>
           <% elsif booking.confirmation? %>
-            <%= 'You are all set!' %>
+            <p class="text-right"><em><%= 'You are all set!' %></em></p>
           <% else %>
-             <%= 'Your booking request was declined' %>
+             <p class="text-right"><em><%= 'Your booking request was declined' %></em></p>
           <% end %>
-          <div style="font-size: 16px; text-align: right">
-            <a href="www.instagram.com" style=" color: grey; font-size: 50px">
-              <i class="fas fa-edit"></i>
-            </a>
-            <a href="www.instagram.com" style=" color: grey; font-size: 50px">
-              <i class="fas fa-trash-alt"></i>
-            </a>
+        </div>
+          
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+  <h2 class="text-center mt-5">Bookings of my boats</h2>
+  <div class="row">
+    <% @bookings.each do |booking| %>
+      <div class="col-12">
+        <div class="booking-card">
+
+        <div class="booking-left">
+          <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
+          <%= link_to boat_path(booking.boat) do %>
+            <h4><%= booking.boat.name %> </h4>
+          <% end %>        
+          <p><span>Boat Owner</span><br> <%= booking.boat.user.name %></p>
+        </div>
+
+        <div class="booking-right">
+          <h6 class="text-right"> Booking #000<%= booking.id %> </h6>
+          <div class="booking-btn">
+            <% if booking.confirmation == nil %>
+              <%=  'Waiting for your response' %>
+            <% elsif booking.confirmation? %>
+              <%= 'You accepted this reservation\'s request' %>
+            <% else %>
+              <%= 'You declined this reservation\'s request' %>
+            <% end %>
+            <% if booking.confirmation == nil %>
+              <%= link_to "Decline", booking_path(booking, confirmation: false), method: "patch", class:"btn btn-danger btn-booking" %>
+              <%= link_to "Accept", booking_path(booking, confirmation: true), method: "patch", class:"btn btn-primary btn-booking" %>
+            <% end %>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-   <div class="col-12 col-md-12 col-lg-12" style= "margin: 10px;">
-    <div class="container" style="background-color: rgba(45, 224, 209, 0.9);padding: 20px; border-radius: 10px;">
-      <h1>My Boat Bookings: </h1>
-    </div>
-  </div>
-   <div class="row">
-    <% @boat_bookings.each do |booking| %>
-      <div class="col-12 col-md-12 col-lg-12" style= " margin: 10px;">
-        <div class="container" style="font-size: 18px; background-color: white; opacity: 0.9; padding: 20px; border-radius: 10px;">
-          Booking Number: 000<%= booking.id %> <br>
-          From: <%= booking.starting_date.strftime("%e %b %Y") %>
-          - Until: <%= booking.ending_date.strftime("%e %b %Y") %> <br>
-          Booked By: <%= booking.user.name %> <br>
-          Confirmation:
-          <% if booking.confirmation == nil %>
-            <%=  'Waiting for your response' %>
-          <% elsif booking.confirmation? %>
-            <%= 'You accepted this reservation\'s request' %>
-          <% else %>
-             <%= 'You declined this reservation\'s request' %>
-          <% end %>
-          <% if booking.confirmation == nil %>
-            <%= link_to "Accept", booking_path(booking, confirmation: true), method: "patch", class:"btn btn-success" %>
-            <%= link_to "Decline", booking_path(booking, confirmation: false), method: "patch", class:"btn btn-danger" %>
-          <% end %>
+          
         </div>
       </div>
     <% end %>
   </div>
-</div>
-
-
-
-
-

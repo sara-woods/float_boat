@@ -1,0 +1,32 @@
+.booking-card {
+  width: 70%;
+  margin: 16px auto;
+  background-color: rgb(223, 249, 255);
+
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  p {
+    margin: 0;
+  }
+  span {
+    font-weight: 700;
+    margin-top: 20px;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.booking-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.btn-booking {
+  width: 80px;
+  margin:2px;
+}
