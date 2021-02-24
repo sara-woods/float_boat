@@ -4,18 +4,72 @@
 # Description
 # Daily Rates -->
 
-<div><img src="https://www.skipperi.com/upload/24109/1920/boat-2021-02-21-10-03-22-2b64343f-2ced-46f2-8def-b97b528cec9a.jpeg?timestamp=1613901804" width= "600" height= "400" alt="boat banner"></div>
+<div class="container">
 
-<h1><%= @boat.name %></h1>
-<p><%= @boat.address %></p>
-<div><%= @boat.description %>
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    
+    <% if @boat.photos.attached? %>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= cl_image_tag @boat.photos.first.key, height: 400, width: 600, crop: :crop, class: "d-block w-100"%>
+        </div>
+        <% @boat.photos[1..-1].each do |photo| %>
+          <div class="carousel-item">
+            <%= cl_image_tag photo.key, height: 400, width: 600, crop: :crop, class: "d-block w-100"%>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= image_tag "https://www.skipperi.com/upload/24109/1920/boat-2021-02-21-10-03-22-2b64343f-2ced-46f2-8def-b97b528cec9a.jpeg?timestamp=1613901804", height: 400, width: 600, class: "d-block w-100 object-fit-cover"%>
+        </div>
+      </div>
+    <% end %>
+    
+
+    <% if @boat.photos.length > 1 %>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+      
+    <% end %>
+
 </div>
-<p>£<%= @boat.daily_rate %></p>
+
+<div class="row">
+  <div class="col-8">
+    <div class="info-holder">
+      <h1><%= @boat.name %></h1>
+      <p><%= @boat.address %></p>
+      <div><%= @boat.description %>
+      </div>
+      <h3>£<%= @boat.daily_rate %> /day</h3>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="info-holder lightgreen-bg">
+      <h3>Booking Form</h3>
+      <%= simple_form_for [ @boat, @booking ] do |f| %>
+        <%= f.input :starting_date, as: :date, html5:  true %>
+        <%= f.input :ending_date, as: :date, html5:  true %>
+        <%= f.submit class: "btn btn-primary"%>
+      <% end %>
+    </div>
+  </div>
+
+</div>
 
 
-<h3>Booking Form</h3>
-<%= simple_form_for [ @boat, @booking ] do |f| %>
-  <%= f.input :starting_date %>
-  <%= f.input :ending_date %>
-  <%= f.submit class: "btn btn-primary"%>
-<% end %>
+
+
+
+
+
+</div>

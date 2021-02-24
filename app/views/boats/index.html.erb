@@ -3,9 +3,13 @@
     <% @boats.each do |boat| %>
       <div class="col-12 col-md-6 col-lg-3">
         <div class="boatcard">
-
-          <div class="boatcard-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://source.unsplash.com/500x400/?boat');">
-          </div>
+          <% if boat.photos.attached? %>
+            <div class="boatcard-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path boat.photos.first.key %>')">
+            </div>
+          <% else %>
+            <div class="boatcard-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://www.skipperi.com/upload/24109/1920/boat-2021-02-21-10-03-22-2b64343f-2ced-46f2-8def-b97b528cec9a.jpeg?timestamp=1613901804')">
+            </div>
+          <% end %>
           
           <div class="boatcard-description">
 
