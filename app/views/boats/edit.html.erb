@@ -1,7 +1,9 @@
-    <%= simple_form_for @boat do |f| %>
-      <%= f.input :name %>    
-      <%= f.input :description %>
-      <%= f.input :address %>
-      <%= f.input :daily_rate %>
-      <%=  f.submit "Edit boat", class: "btn btn-primary" %>
-    <% end %>
+<div class="form-container">
+  <%= simple_form_for @boat do |f| %>
+    <%= f.input :name %>    
+    <%= f.input :description %>
+    <%= f.input :address %>
+    <%= f.input :daily_rate %>
+    <%=  f.submit "Edit boat", class: "btn btn-primary" %>
+  <% end %>
+</div>
