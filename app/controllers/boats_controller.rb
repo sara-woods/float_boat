@@ -26,7 +26,13 @@ class BoatsController < ApplicationController
   def show
     @boat = Boat.find(params[:id])
     @booking = Booking.new
+    if @boat.latitude && @boat.longitude
+        @markers =  [{
+        lat: @boat.latitude,
+        lng: @boat.longitude
+      }]
   end
+end
 
   def edit
     @boat = Boat.find(params[:id])
