@@ -1,12 +1,12 @@
-<div class="navbar navbar-expand-sm navbar-lewagon <%= "navbar-home" if params[:action] == "home" %>">
-  
+<div class="navbar navbar-expand-sm navbar-lewagon <%= "navbar-home" if params[:action] == "home" %> <%="fixed-top " if params[:action] == "index" && params[:controller] == "boats"  %>">
+
   <%= link_to root_path, class: "navbar-brand" do %>
     <h3 class="logo <%= "logo-home" if params[:action] == "home" %>">Floatify</h3>
   <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-    
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
@@ -33,11 +33,11 @@
         </li>
 
 
-        <% if params[:action] == "home" %>      
+        <% if params[:action] == "home" %>
           <li class="nav-item">
             <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-light" %>
           </li>
-        <% else %>           
+        <% else %>
           <li class="nav-item">
             <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-dark" %>
           </li>
@@ -45,7 +45,7 @@
 
         <li class="nav-item">
           <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
-        </li>        
+        </li>
       <% end %>
     </ul>
   </div>
