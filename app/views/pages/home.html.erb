@@ -3,7 +3,22 @@
     <div class="banner-text">
       <h1><em>ADVENTURE</em></h1>
       <p>Rent a boat directly from a boat owner and start your adventure at sea. </p>
-      <%# <a class="btn btn-flat" href="#">Apply now</a> %>
+      <!-- <a class="btn btn-flat" href="#">Search</a> -->
+
+        <%= form_tag boats_path, method: :get do %>
+          <div class="input-group" style="opacity: 0.80">
+            <%= text_field_tag :address,
+            params[:address],
+            class: "form-control",
+            placeholder: "Enter a location..."%>
+            <div class="input-group-append">
+              <%= button_tag(type: "submit", class: "btn btn-secondary") do %>
+                <i class="fa fa-search"></i>
+              <%end%>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
