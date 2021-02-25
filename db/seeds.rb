@@ -23,12 +23,12 @@ User.destroy_all if Rails.env.development?
 end
 
 file_array = []
-50.times do
+15.times do
   file_array << "https://source.unsplash.com/random?sig=#{rand(1..50)}/&boat"
 end
 
 # Create boat seeds (10 of them)
-30.times do
+15.times do
   boat = Boat.new(name: Faker::FunnyName.two_word_name,
               address: Faker::Address.street_address,
               description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
@@ -40,7 +40,7 @@ end
 
 
 # Create booking seeds (3 of them)
-30.times do
+15.times do
   Booking.create!(starting_date: Date.new(2021, 5, 10),
   ending_date: Date.new(2021, 5, 12),
   boat_id: Boat.pluck(:id).sample,
