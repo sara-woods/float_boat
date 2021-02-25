@@ -10,6 +10,7 @@ require("channels")
 
 
 import { initMapbox } from '../plugins/init_mapbox';
+import { initTypewriter } from '../plugins/init_typewriter';
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -35,4 +36,7 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
    initMapbox();
+   initTypewriter();
 });
+
+

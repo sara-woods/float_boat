@@ -1,7 +1,7 @@
 .boatcard {
   margin-bottom: 26px;
   &:hover {
-    .fa-compass {
+    .compass {
       opacity: 0.5;
     }
   }
@@ -49,7 +49,7 @@
   }
 }
 
-.fa-compass {
+.compass {
   font-size: 30px;
   color: white;
   opacity: 0;
