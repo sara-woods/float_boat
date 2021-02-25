@@ -20,7 +20,11 @@ class BoatsController < ApplicationController
   end
 
   def index
-    @boats = Boat.all
+    if params[:address].present?
+      @boats = Boat.where("address ILIKE ?", "%#{params[:address]}%")
+    else
+      @boats = Boat.all
+    end
   end
 
   def show
