@@ -2,7 +2,7 @@
   <div class="d-flex">
     <div class="row">
     <% @boats.each do |boat| %>
-      <div class="col-6 col-md-3 col-lg-6">
+      <div class="col-6 col-sm-12 col-md-6 col-lg-6">
         <div class="boatcard ">
           <% if boat.photos.attached? %>
             <div class="boatcard-image" style="background-image: url('<%= cl_image_path boat.photos.first.key %>')">

@@ -29,7 +29,8 @@ class BoatsController < ApplicationController
        @markers = @boats.geocoded.map do |boat|
       {
         lat: boat.latitude,
-        lng: boat.longitude
+        lng: boat.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { boat: boat })
       }
     end
   end
