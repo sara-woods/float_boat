@@ -6,10 +6,13 @@
       <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">My bookings</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Bookings of my boats</button>
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">To confirm</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">To confirm</button>
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Accepted bookings</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="third-tab" data-bs-toggle="tab" data-bs-target="#third" type="button" role="tab" aria-controls="third" aria-selected="false">Declined bookings</button>
     </li>
   </ul>
 
@@ -18,7 +21,7 @@
   <div class="tab-content" id="myTabContent">
 
   
-    <%# First tab %>
+    <%# My bookings tab %>
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row">
             
@@ -60,7 +63,7 @@
         </div>
     </div>
 
-    <%# Second tab %>
+    <%# Accepted bookings tab %>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <div class="row">
 
@@ -68,12 +71,66 @@
         <% if @boat_bookings.nil? %>
           <div class="col-12">
             <br>
-            <p><em>No one has booked your boat(s) yet...</em></p>
+            <p><em>You have not accepted any bookings yet...</em></p>
           </div>           
         <% else %>
 
           <% @boat_bookings.each do |booking| %>
-            <% if booking.confirmation != nil %>
+            <% if booking.confirmation == true %>
+              <div class="col-12">
+                <div class="booking-card <%= "red-bkg" if booking.confirmation != true %> <%= "green-bkg" if booking.confirmation == true %>">
+
+                  <div class="booking-left">
+                    <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
+                    <%= link_to boat_path(booking.boat) do %>
+                      <h4><%= booking.boat.name %> </h4>
+                    <% end %>        
+                    <p><span>Boat Renter</span><br> <%= booking.user.name %></p>
+                  </div>
+
+                  <div class="booking-right">
+                    <h6 class="text-right"> Booking #000<%= booking.id %> </h6>
+                    <div class="booking-btn">
+                      <% if booking.confirmation == nil %>
+                        <%=  'Waiting for your response' %>
+                      <% elsif booking.confirmation? %>
+                        <%= 'You accepted this reservation\'s request' %>
+                      <% else %>
+                        <%= 'You declined this reservation\'s request' %>
+                      <% end %>
+                      <% if booking.confirmation == nil %>
+                        <%= link_to "Decline", booking_path(booking, confirmation: false), method: "patch", class:"btn btn-danger btn-booking" %>
+                        <%= link_to "Accept", booking_path(booking, confirmation: true), method: "patch", class:"btn btn-primary btn-booking" %>
+                      <% end %>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            <% end %>            
+
+          <% end %>
+
+        <% end %>
+      
+      </div>
+    </div>
+
+
+    <%# Declined bookings tab %>
+    <div class="tab-pane fade" id="third" role="tabpanel" aria-labelledby="third-tab">
+      <div class="row">
+
+        
+        <% if @boat_bookings.nil? %>
+          <div class="col-12">
+            <br>
+            <p><em>You have not declined any bookings yet...</em></p>
+          </div>           
+        <% else %>
+
+          <% @boat_bookings.each do |booking| %>
+            <% if booking.confirmation != nil && booking.confirmation == false %>
               <div class="col-12">
                 <div class="booking-card <%= "red-bkg" if booking.confirmation != true %> <%= "green-bkg" if booking.confirmation == true %>">
 
@@ -115,7 +172,22 @@
 
 
 
-    <%# Third tab %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%# To confirm tab %>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
       <div class="row">
 
@@ -160,6 +232,21 @@
 
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
