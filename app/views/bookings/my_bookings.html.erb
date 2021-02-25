@@ -1,68 +1,175 @@
-<h2 class="text-center">My bookings</h2>
 <div class="container mt-4">
 
-  <div class="row">
-    <% @bookings.each do |booking| %>
-      <div class="col-12">
-        <div class="booking-card">
 
-        <div class="booking-left">
-          <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
-          <%= link_to boat_path(booking.boat) do %>
-            <h4><%= booking.boat.name %> </h4>
-          <% end %>        
-          <p><span>Boat Owner</span><br> <%= booking.boat.user.name %></p>
-        </div>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">My bookings</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Bookings of my boats</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">To confirm</button>
+    </li>
+  </ul>
 
-        <div class="booking-right">
-          <h6 class="text-right"> Booking #000<%= booking.id %> </h6>
-          <% if booking.confirmation == nil %>
-            <p class="text-right"><em><%=  'Waiting for owner\'s response' %></em></p>
-          <% elsif booking.confirmation? %>
-            <p class="text-right"><em><%= 'You are all set!' %></em></p>
+
+
+  <div class="tab-content" id="myTabContent">
+
+  
+    <%# First tab %>
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row">
+            
+          <% if @bookings.empty? %>
+              <div class="col-12">
+                <br>
+                <p><em>You have no bookings yet...</em></p>
+              </div>           
           <% else %>
-             <p class="text-right"><em><%= 'Your booking request was declined' %></em></p>
+            <% @bookings.each do |booking| %>
+              <div class="col-12">
+            
+                <div class="booking-card">
+
+                <div class="booking-left">
+                  <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
+                  <%= link_to boat_path(booking.boat) do %>
+                    <h4><%= booking.boat.name %> </h4>
+                  <% end %>        
+                  <p><span>Boat Owner</span><br> <%= booking.boat.user.name %></p>
+                </div>
+
+                <div class="booking-right">
+                  <h6 class="text-right"> Booking #000<%= booking.id %> </h6>
+                  <% if booking.confirmation == nil %>
+                    <p class="text-right"><em><%=  'Waiting for owner\'s response' %></em></p>
+                  <% elsif booking.confirmation? %>
+                    <p class="text-right"><em><%= 'You are all set!' %></em></p>
+                  <% else %>
+                    <p class="text-right"><em><%= 'Your booking request was declined' %></em></p>
+                  <% end %>
+                </div>
+                  
+                </div>
+              </div>
+            <% end %>
           <% end %>
+
         </div>
-          
-        </div>
+    </div>
+
+    <%# Second tab %>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="row">
+
+        
+        <% if @boat_bookings.nil? %>
+          <div class="col-12">
+            <br>
+            <p><em>No one has booked your boat(s) yet...</em></p>
+          </div>           
+        <% else %>
+
+          <% @boat_bookings.each do |booking| %>
+            <% if booking.confirmation != nil %>
+              <div class="col-12">
+                <div class="booking-card <%= "red-bkg" if booking.confirmation != true %> <%= "green-bkg" if booking.confirmation == true %>">
+
+                  <div class="booking-left">
+                    <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
+                    <%= link_to boat_path(booking.boat) do %>
+                      <h4><%= booking.boat.name %> </h4>
+                    <% end %>        
+                    <p><span>Boat Renter</span><br> <%= booking.user.name %></p>
+                  </div>
+
+                  <div class="booking-right">
+                    <h6 class="text-right"> Booking #000<%= booking.id %> </h6>
+                    <div class="booking-btn">
+                      <% if booking.confirmation == nil %>
+                        <%=  'Waiting for your response' %>
+                      <% elsif booking.confirmation? %>
+                        <%= 'You accepted this reservation\'s request' %>
+                      <% else %>
+                        <%= 'You declined this reservation\'s request' %>
+                      <% end %>
+                      <% if booking.confirmation == nil %>
+                        <%= link_to "Decline", booking_path(booking, confirmation: false), method: "patch", class:"btn btn-danger btn-booking" %>
+                        <%= link_to "Accept", booking_path(booking, confirmation: true), method: "patch", class:"btn btn-primary btn-booking" %>
+                      <% end %>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            <% end %>            
+
+          <% end %>
+
+        <% end %>
+      
       </div>
-    <% end %>
-  </div>
+    </div>
 
 
-  <h2 class="text-center mt-5">Bookings of my boats</h2>
-  <div class="row">
-    <% @boat_bookings.each do |booking| %>
-      <div class="col-12">
-        <div class="booking-card">
 
-        <div class="booking-left">
-          <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
-          <%= link_to boat_path(booking.boat) do %>
-            <h4><%= booking.boat.name %> </h4>
-          <% end %>        
-          <p><span>Boat Renter</span><br> <%= booking.user.name %></p>
-        </div>
+    <%# Third tab %>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+      <div class="row">
 
-        <div class="booking-right">
-          <h6 class="text-right"> Booking #000<%= booking.id %> </h6>
-          <div class="booking-btn">
-            <% if booking.confirmation == nil %>
-              <%=  'Waiting for your response' %>
-            <% elsif booking.confirmation? %>
-              <%= 'You accepted this reservation\'s request' %>
-            <% else %>
-              <%= 'You declined this reservation\'s request' %>
+        <% nil_bookings = 0 %> 
+
+
+
+          <% @boat_bookings.each do |booking| %>
+            <% nil_bookings += 1 if booking.confirmation.nil?%>
+            <% if booking.confirmation.nil? %>
+              <div class="col-12">
+                <div class="booking-card">
+
+                  <div class="booking-left">
+                    <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
+                    <%= link_to boat_path(booking.boat) do %>
+                      <h4><%= booking.boat.name %> </h4>
+                    <% end %>        
+                    <p><span>Boat Renter</span><br> <%= booking.user.name %></p>
+                  </div>
+
+                  <div class="booking-right">
+                    <h6 class="text-right"> Booking #000<%= booking.id %> </h6>
+                    <div class="booking-btn">
+                      <%=  'Waiting for your response' %>
+                        <%= link_to "Decline", booking_path(booking, confirmation: false), method: "patch", class:"btn btn-danger btn-booking" %>
+                        <%= link_to "Accept", booking_path(booking, confirmation: true), method: "patch", class:"btn btn-primary btn-booking" %>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
             <% end %>
-            <% if booking.confirmation == nil %>
-              <%= link_to "Decline", booking_path(booking, confirmation: false), method: "patch", class:"btn btn-danger btn-booking" %>
-              <%= link_to "Accept", booking_path(booking, confirmation: true), method: "patch", class:"btn btn-primary btn-booking" %>
-            <% end %>
-          </div>
-        </div>
-          
-        </div>
+          <% end %>
+
+          <% if nil_bookings.zero? %>
+            <div class="col-12">
+              <br>
+              <p><em>Nothing to confirm...</em></p>
+            </div>           
+          <% end %>
+
       </div>
-    <% end %>
+    </div>
+
+
+
+
+
+
   </div>
+</div>
+
+
+
+
+
