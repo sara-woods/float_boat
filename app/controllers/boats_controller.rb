@@ -20,12 +20,25 @@ class BoatsController < ApplicationController
   end
 
   def index
-    @boats = Boat.all
+    if params[:address].present?
+      @boats = Boat.near(params[:address], 50)
+    else
+      @boats = Boat.all
+    end
+
+       @markers = @boats.geocoded.map do |boat|
+      {
+        lat: boat.latitude,
+        lng: boat.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { boat: boat })
+      }
+    end
   end
 
   def show
     @boat = Boat.find(params[:id])
     @booking = Booking.new
+
     @review = Review.new
     # check if boats have bookings => loop over bookings and see if they match the current_user
     # if they do match the current user => check if Date.today is passed ending_date of the booking
@@ -37,7 +50,15 @@ class BoatsController < ApplicationController
             end
          end
     end
+
+    if @boat.latitude && @boat.longitude
+        @markers =  [{
+        lat: @boat.latitude,
+        lng: @boat.longitude
+      }]
+
   end
+end
 
   def edit
     @boat = Boat.find(params[:id])

@@ -1,0 +1,48 @@
+.search-bar {
+  position: relative;
+  width: max-content;
+}
+
+.btn-circle {
+  background-color: $blue;
+  &:hover {
+    background-color: #36c0df;
+  }
+}
+
+.search-compass {
+  color: white;
+  font-size: 32px;
+}
+
+.search-input {
+  height: 75px;
+  width: 700px;
+  border-radius: 50px;
+  font-size: 1.6rem;
+  padding-left: 1.6rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+}
+
+.search-button  {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+}
+
+.custom-circle-button {
+  width:  61px;
+  height: 61px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-container  {
+  width: 800px;
+  margin: 100px auto 0px auto;
+  top: 67px;
+  z-index: 99999;
+}
