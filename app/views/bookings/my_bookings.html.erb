@@ -20,27 +20,27 @@
 
   <div class="tab-content" id="myTabContent">
 
-  
+
     <%# My bookings tab %>
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row">
-            
+
           <% if @bookings.empty? %>
               <div class="col-12">
                 <br>
                 <p><em>You have no bookings yet...</em></p>
-              </div>           
+              </div>
           <% else %>
             <% @bookings.each do |booking| %>
               <div class="col-12">
-            
+
                 <div class="booking-card">
 
                 <div class="booking-left">
                   <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
                   <%= link_to boat_path(booking.boat) do %>
                     <h4><%= booking.boat.name %> </h4>
-                  <% end %>        
+                  <% end %>
                   <p><span>Boat Owner</span><br> <%= booking.boat.user.name %></p>
                 </div>
 
@@ -54,7 +54,7 @@
                     <p class="text-right"><em><%= 'Your booking request was declined' %></em></p>
                   <% end %>
                 </div>
-                  
+
                 </div>
               </div>
             <% end %>
@@ -67,7 +67,7 @@
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <div class="row">
 
-        
+
         <% if @boat_bookings.nil? %>
           <div class="col-12">
             <br>
@@ -138,7 +138,7 @@
                     <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
                     <%= link_to boat_path(booking.boat) do %>
                       <h4><%= booking.boat.name %> </h4>
-                    <% end %>        
+                    <% end %>
                     <p><span>Boat Renter</span><br> <%= booking.user.name %></p>
                   </div>
 
@@ -158,15 +158,15 @@
                       <% end %>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
-            <% end %>            
+            <% end %>
 
           <% end %>
 
         <% end %>
-      
+
       </div>
     </div>
 
@@ -191,7 +191,7 @@
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
       <div class="row">
 
-        <% nil_bookings = 0 %> 
+        <% nil_bookings = 0 %>
 
 
 
@@ -205,7 +205,7 @@
                     <h6> <%= booking.starting_date.strftime("%e %b %Y") %> - <%= booking.ending_date.strftime("%e %b %Y") %> </h6>
                     <%= link_to boat_path(booking.boat) do %>
                       <h4><%= booking.boat.name %> </h4>
-                    <% end %>        
+                    <% end %>
                     <p><span>Boat Renter</span><br> <%= booking.user.name %></p>
                   </div>
 
@@ -217,7 +217,7 @@
                         <%= link_to "Accept", booking_path(booking, confirmation: true), method: "patch", class:"btn btn-primary btn-booking" %>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
             <% end %>
@@ -227,7 +227,7 @@
             <div class="col-12">
               <br>
               <p><em>Nothing to confirm...</em></p>
-            </div>           
+            </div>
           <% end %>
 
       </div>
