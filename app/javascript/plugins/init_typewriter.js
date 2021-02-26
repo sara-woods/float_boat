@@ -34,7 +34,7 @@ const initTypewriter = () => {
     .typeString('brighton')
     .pauseFor(1000)
     .deleteAll()
-    .typeString('marseilles')
+    .typeString('marseille')
     .pauseFor(1000)
     .start();
 }
