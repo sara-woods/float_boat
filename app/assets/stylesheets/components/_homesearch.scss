@@ -5,6 +5,9 @@
 
 .btn-circle {
   background-color: $blue;
+  &:hover {
+    background-color: #36c0df;
+  }
 }
 
 .search-compass {
@@ -19,7 +22,7 @@
   font-size: 1.6rem;
   padding-left: 1.6rem;
   font-family: 'Poppins', sans-serif;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .search-button  {
