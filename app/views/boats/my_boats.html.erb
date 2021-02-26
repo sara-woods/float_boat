@@ -18,11 +18,11 @@
               <h5><strong><%= link_to "#{boat.name}", boat, class: "boat-link" %></strong></h5>
               <p><%= boat.address %></p>
               <h5><strong>£<%= boat.daily_rate %></strong> <span>/day</span></h5>
-                <%= link_to boat_path(boat), method: :delete, data: {confirm: "Are you sure you want to delete?"},style: "font-size: 16px" do %>
-                <i class="fas fa-trash-alt"></i>
+                <%= link_to boat_path(boat), method: :delete, data: {confirm: "Are you sure you want to delete?"}, class: "icon" do %>
+                  <i class="fas fa-trash-alt"></i>
                 <% end %>
-                <%= link_to edit_boat_path(boat), style: "font-size: 16px" do %>
-                <i class="fas fa-edit"></i>
+                <%= link_to edit_boat_path(boat), class: "icon" do %>
+                  <i class="fas fa-edit"></i>
                 <% end %>
             </div>
 

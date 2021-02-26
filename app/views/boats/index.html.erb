@@ -1,32 +1,46 @@
+<div class="noresult-container text-center">
+    <% if @boats.empty? %>
+      <p><em>Sorry, no boats found...</em></p>
+    <% end %>
+</div>
+
+
 <div class="index-container">
   <div class="d-flex">
     <div class="row">
-    <% @boats.each do |boat| %>
-      <div class="col-6 col-sm-12 col-md-6 col-lg-6">
-        <div class="boatcard ">
-          <% if boat.photos.attached? %>
-            <div class="boatcard-image" style="background-image: url('<%= cl_image_path boat.photos.first.key %>')">
+      <% @boats.each do |boat| %>
+        <div class="col-6 col-sm-12 col-md-6 col-lg-6">
+          <%= link_to boat_path(boat) do %>
+            <div class="boatcard">
+              <% if boat.photos.attached? %>
+                <div class="boatcard-image" style="background-image: url('<%= cl_image_path boat.photos.first.key %>')">
+                  <i class="far fa-compass compass"></i>
+                </div>
+              <% else %>
+                <div class="boatcard-image" style="background-image: url('https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1328&q=80')">
+                  <i class="far fa-compass compass"></i>
+                </div>
+              <% end %>
+
+              <div class="boatcard-description">
+                <h5><strong><%= link_to "#{boat.name}", boat, class: "boat-link" %></strong></h5>
+                <p><%= boat.address %></p>
+                <h5><strong>£<%= boat.daily_rate %></strong> <span>/day</span></h5>
+              </div>
+
             </div>
-          <% else %>
-            <div class="boatcard-image" style="background-image: url('https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1328&q=80')">
-            </div>
-          <% end %>
-
-          <div class="boatcard-description">
-
-            <h5><strong><%= link_to "#{boat.name}", boat, class: "boat-link" %></strong></h5>
-            <p><%= boat.address %></p>
-            <h5><strong>£<%= boat.daily_rate %></strong> <span>/day</span></h5>
-          </div>
-
+          <% end %>  
         </div>
-
-      </div>
       <% end %>
-    </div>
+   </div>
+      
+
     <div id="map"
        style="width: 80vw; height: 100vh;"
        data-markers="<%= @markers.to_json %>"
-       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>" class="sticky-top ml-4"></div>
+       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>" class="sticky-top ml-4">
+    </div>
+
+
   </div>
 </div>
