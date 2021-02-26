@@ -10,9 +10,9 @@ require 'date'
 require "open-uri"
 
 # Destroy already existing seeds to not overpopulate database for every 'db:seed'
-Booking.destroy_all 
-Boat.destroy_all 
-User.destroy_all 
+Booking.destroy_all
+Boat.destroy_all
+User.destroy_all
 
 
 # Create user seeds (15 of them)
@@ -27,7 +27,7 @@ file_array = []
   file_array << "https://source.unsplash.com/random?sig=#{rand(1..50)}/&boat"
 end
 
-address_array = ["",  "",  "",  "", "", "", ""]
+address_array = ["Saxon Wharf Marina, Southampton",  "Poole Harbour, Poole",  "Shamrock Quay, Southampton",  "Ocean Village Marina, Southampton", "Shoreham-by-Sea", "Poole", "Bournemouth", "Weston-super-Mare", "Poole Quay, Poole", "Great Yarmouth", "Clacton-on-Sea", "Pembroke Dock", "ABP Town Quay Marina, Southampton", "Woolsten, Southampton", "Hythe, Southampton", "Eling, Southampton", "Warsah, Southampton", "Hamble-le-Rice, Southampton", "Netley, Southampton"]
 
 # Create boat seeds (10 of them)
 30.times do
