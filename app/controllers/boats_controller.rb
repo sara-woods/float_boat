@@ -21,7 +21,7 @@ class BoatsController < ApplicationController
 
   def index
     if params[:address].present?
-      @boats = Boat.where("address ILIKE ?", "%#{params[:address]}%")
+      @boats = Boat.near(params[:address], 50)
     else
       @boats = Boat.all
     end
