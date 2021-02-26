@@ -28,10 +28,13 @@ const initTypewriter = () => {
   });
    
   typewriter
-    .typeString('Pick a location')
+    .typeString('pick a location')
     .pauseFor(1000)
     .deleteAll()
-    .typeString('France')
+    .typeString('brighton')
+    .pauseFor(1000)
+    .deleteAll()
+    .typeString('marseilles')
     .pauseFor(1000)
     .start();
 }
