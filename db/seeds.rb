@@ -27,10 +27,12 @@ file_array = []
   file_array << "https://source.unsplash.com/random?sig=#{rand(1..50)}/&boat"
 end
 
+address_array = ["",  "",  "",  "", "", "", ""]
+
 # Create boat seeds (10 of them)
 30.times do
   boat = Boat.new(name: Faker::FunnyName.two_word_name,
-              address: Faker::Address.street_address,
+              address: address_array.sample,
               description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
               daily_rate: rand(10..100),
               user_id: User.pluck(:id).sample)
