@@ -10,9 +10,9 @@ require 'date'
 require "open-uri"
 
 # Destroy already existing seeds to not overpopulate database for every 'db:seed'
-Booking.destroy_all if Rails.env.development?
-Boat.destroy_all if Rails.env.development?
-User.destroy_all if Rails.env.development?
+Booking.destroy_all 
+Boat.destroy_all 
+User.destroy_all 
 
 
 # Create user seeds (15 of them)
