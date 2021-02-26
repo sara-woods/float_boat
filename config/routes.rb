@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :boats do
     resources :bookings, only: [:new, :create]
+    resources :reviews, only: [:create]
   end
   resources :bookings, only: [:update]
   get "my_bookings", to: "bookings#my_bookings"

@@ -54,24 +54,74 @@
     </div>
   </div>
 
+
+
   <div class="col-4">
     <div class="info-holder lightgreen-bg">
       <h5>Book me here</h5>
-      <%= simple_form_for [ @boat, @booking ] do |f| %>
-        <%= f.input :starting_date, as: :date, html5:  true %>
-        <%= f.input :ending_date, as: :date, html5:  true %>
-        <%= f.submit class: "btn btn-primary"%>
-      <% end %>
+        <% if current_user %>
+          <%= simple_form_for [ @boat, @booking ] do |f| %>
+            <%= f.input :starting_date, as: :date, html5:  true %>
+            <%= f.input :ending_date, as: :date, html5:  true %>
+            <%= f.submit class: "btn btn-primary"%>
+          <% end %>
+        <% else %>
+          <%= "You must sign-up or login to book your boat" %>
+        <% end %>
     </div>
   </div>
 
 </div>
 
+  <div class="review-section">
+    <h4><b><%= pluralize @boat.reviews.size, "Review" %></b></h4>
+    <div class="row">
+
+     <div class="col-6">
+            <ul>
+
+                <% @boat.reviews.each do |review|  %>
+                  <li id="review-<%= review.id  %>">
+                    <div style=" margin: 1rem">
+                      <%= " #{(review.user.name.capitalize)} commented on #{review[:created_at].strftime("%d/%m/%Y")} at #{review[:created_at].strftime("%k:%M")}:"%>
+                    </div>
+                    <div style="background-color: #DFF9FF; border-radius: 1rem">
+                     <n><b><i><%= "''#{review.content}''"%></i></b>
+                    </div>
+
+                  </li>
+                <% end %>
+
+            </ul>
+      </div>
+
+    </div>
+    <!--
+    - if current_user, @booking.confirmation? and Date.today > @booking(params[:ending_date] => alert: you
+
+     && @booking.confirmation?
+     @booking.confirmation? && Date.today > @booking(params[:ending_date]
+
+
+
+    -->
+    <% if user_signed_in? %>
+      <% if @review_enabler %>
+        <%= render :partial => 'reviews/new', :locals => {:review => @review, :boat => @boat } %>
+      <% end %>
+    <% end %>
+    </div>
+
+
 
 <div id="map"
      style="width: 100%; height: 600px;"
      data-markers="<%= @markers.to_json %>"
-     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+ </div>
+
 
 
 </div>
+
+
