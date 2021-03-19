@@ -1,4 +1,4 @@
-## ⛵Floatify - AirBnb but for boats!🚤
+## ⛵Floatify - AirBnB but for boats!🚤
 
 **Web app based on renting and letting out boats.**
 
