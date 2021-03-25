@@ -26,7 +26,6 @@ const addMarkersToMap = (map, markers) => {
 
 
 const initMapbox = () => {
-  console.log("initMapboxWorking")
   const mapElement = document.getElementById('map');
   const fitMapToMarkers = (map, markers) => {
   const bounds = new mapboxgl.LngLatBounds();
