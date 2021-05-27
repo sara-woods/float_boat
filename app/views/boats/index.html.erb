@@ -1,13 +1,15 @@
 <div class="search-container sticky-top mt-6">
   <%= form_tag boats_path, method: :get do %>
-    <div class="search-bar";>
-      <%= text_field_tag :address,
-      params[:address],
-      class: "form-control search-input", placeholder: "enter a location..."%>
-      <div class="search-button">
-        <%= button_tag(type: "submit", class: "btn btn-circle custom-circle-button") do %>
-          <i class="far fa-compass search-compass"></i>
-        <%end%>
+    <div class="search-index d-flex justify-content-center">
+      <div class="mt-2">
+        <%= text_field_tag :address,
+        params[:address],
+        class: "form-control search-input", placeholder: "enter a location..."%>
+        <div class="search-button-index">
+          <%= button_tag(type: "submit", class: "btn btn-circle custom-circle-button") do %>
+            <i class="far fa-compass search-compass"></i>
+          <%end%>
+        </div>
       </div>
     </div>
   <% end %>
@@ -15,19 +17,21 @@
 
 
 <div class="noresult-container text-center">
-    <% if @boats.empty? %>
-      <p><em>Sorry, no boats found...</em></p>
-    <% end %>
+  <% if @boats.empty? %>
+    <p><em>Sorry, no boats found. Try another search.</em></p>
+  <% end %>
 </div>
 
 
 <div class="index-container">
   <div class="d-flex justify-content-between">
+
     <div class="row w-100">
       <% @boats.each do |boat| %>
         <div class="col-12 col-sm-12 col-md-6 col-lg-4">
           <%= link_to boat_path(boat) do %>
             <div class="boatcard">
+
               <% if boat.photos.attached? %>
                 <div class="boatcard-image" style="background-image: url('<%= cl_image_path boat.photos.first.key %>')">
                   <i class="far fa-compass compass"></i>
@@ -50,13 +54,11 @@
       <% end %>
    </div>
 
-
     <div id="map"
        style="width: 50vw; height: 100vh; position: sticky; top: 0;"
        data-markers="<%= @markers.to_json %>"
        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>" class="sticky-top ml-4">
     </div>
-
 
   </div>
 </div>
